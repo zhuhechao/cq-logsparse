@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.dfjinxin.modules.price.dao.PssDatasetInfoDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.dfjinxin.modules.price.entity.PssDatasetInfoEntity" id="pssDatasetInfoMap">
+        <result property="dataSetId" column="data_set_id"/>
+        <result property="dataSetName" column="data_set_name"/>
+        <result property="indeVar" column="inde_var"/>
+        <result property="dataTime" column="data_time"/>
+        <result property="dataSetType" column="data_set_type"/>
+        <result property="dataSetEngName" column="data_set_eng_name"/>
+        <result property="shape" column="shape"/>
+        <result property="userId" column="user_id"/>
+        <result property="userRealName" column="user_real_name"/>
+        <result property="dataFeature" column="date_feature"/>
+    </resultMap>
+
+    <select id="getDataSetByAnalyWay" resultMap="pssDatasetInfoMap">
+        SELECT pdi.*
+        from pss_analy_info pai
+        LEFT JOIN pss_dataset_info pdi
+        ON pdi.data_set_id = pai.data_set_id
+        WHERE pai.analy_way =#{analyWay}
+    </select>
+
+    <select id="queryByPage" resultMap="pssDatasetInfoMap">
+        SELECT
+        dset.data_set_id,
+        dset.data_set_name,
+        dset.data_set_type,
+        dset.inde_var,
+        dset.data_time,
+        dset.data_set_eng_name,
+        dset.user_id,
+        dset.shape,
+        us.user_real_name
+        FROM pss_dataset_info dset
+        left join pss_user_info us on us.user_id = dset.user_id
+        WHERE us.user_status =1
+        <if test="param.dataSetName!= null and param.dataSetName.trim() !=''">
+            AND dset.data_set_name = #{param.dataSetName}
+        </if>
+    </select>
+
+</mapper>

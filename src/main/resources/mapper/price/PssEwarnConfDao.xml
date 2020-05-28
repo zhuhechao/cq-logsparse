@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.dfjinxin.modules.price.dao.PssEwarnConfDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.dfjinxin.modules.price.entity.PssEwarnConfEntity" id="pssEwarnConfMap">
+        <result property="ewarnId" column="ewarn_id"/>
+        <result property="rschId" column="rsch_id"/>
+        <result property="ewarnName" column="ewarn_name"/>
+        <result property="ewarnTypeId" column="ewarn_type_id"/>
+        <result property="ewarnUlmtRed" column="ewarn_ulmt_red"/>
+        <result property="ewarnLlmtRed" column="ewarn_llmt_red"/>
+        <result property="ewarnUlmtOrange" column="ewarn_ulmt_orange"/>
+        <result property="ewarnLlmtOrange" column="ewarn_llmt_orange"/>
+        <result property="ewarnUlmtYellow" column="ewarn_ulmt_yellow"/>
+        <result property="ewarnLlmtYellow" column="ewarn_llmt_yellow"/>
+        <result property="ewarnUlmtGreen" column="ewarn_ulmt_green"/>
+        <result property="ewarnLlmtGreen" column="ewarn_llmt_green"/>
+        <result property="ewarnTerm" column="ewarn_term"/>
+        <result property="ewarnDays" column="ewarn_days"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="crteDate" column="crte_date"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="crteName" column="crte_name"/>
+        <result property="remarks" column="remarks"/>
+        <result property="colorValRed" column="color_val_red"/>
+        <result property="colorValOrange" column="color_val_orange"/>
+        <result property="colorValYellow" column="color_val_yellow"/>
+        <result property="colorValGreen" column="color_val_green"/>
+    </resultMap>
+
+    <select id="queryPageListCount" resultType="java.lang.Integer">
+        select count(*) from pss_ewarn_conf pec
+        where pec.del_flag =0
+        <if test="param.ewarnId != null and param.ewarnId !=''">
+            and pec.ewarn_id=#{param.ewarnId}
+        </if>
+        <if test="param.ewarnTypeId != null and param.ewarnTypeId !=''">
+            and pec.ewarn_type_id=#{param.ewarnTypeId}
+        </if>
+    </select>
+
+    <select id="queryPageList" resultMap="pssEwarnConfMap">
+        select pec.* from pss_ewarn_conf pec
+        where pec.del_flag =0
+        <if test="param.ewarnId != null and param.ewarnId !=''">
+            and pec.ewarn_id=#{param.ewarnId}
+        </if>
+        <if test="param.ewarnTypeId != null and param.ewarnTypeId !=''">
+            and pec.ewarn_type_id=#{param.ewarnTypeId}
+        </if>
+        LIMIT #{param.start}, #{param.pageSize}
+    </select>
+</mapper>

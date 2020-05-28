@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.dfjinxin.modules.price.dao.PssCommTotalDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.dfjinxin.modules.price.entity.PssCommTotalEntity" id="pssCommTotalMap">
+        <result property="commId" column="comm_id"/>
+        <result property="commName" column="comm_name"/>
+        <result property="parentCode" column="parent_code"/>
+        <result property="levelCode" column="level_code"/>
+        <result property="createTime" column="create_time"/>
+        <result property="dataFlag" column="data_flag"/>
+    </resultMap>
+
+    <select id="selectSubCommByLevelCode2" resultMap="pssCommTotalMap">
+        select c2.*,
+        pcc.ewarn_id,
+        pcc.index_id as indexId,
+        pcc.remarks,
+        pcc.conf_id as confId,
+        pec.ewarn_name,
+        pec.ewarn_type_id as ewarnTypeId
+        FROM pss_comm_total c2
+        left join pss_comm_conf pcc on c2.comm_id=pcc.comm_id
+        left join pss_ewarn_conf pec on pcc.ewarn_id = pec.ewarn_id
+        where pcc.del_flag=0 and pec.del_flag=0
+        and c2.parent_code = #{parentCode}
+        and c2.data_flag=0
+        LIMIT #{param.start}, #{param.pageSize}
+    </select>
+
+    <select id="selectSubCommCountByLevelCode2" resultType="java.lang.Integer">
+        SELECT count(c2.comm_id)
+        FROM pss_comm_total c2
+        left join pss_comm_conf pcc on c2.comm_id=pcc.comm_id
+        left join pss_ewarn_conf pec on pcc.ewarn_id = pec.ewarn_id
+        where pcc.del_flag=0 and pec.del_flag=0
+        and c2.parent_code = #{parentCode}
+        and c2.data_flag=0
+    </select>
+
+    <select id="findCommByLevelCode2" resultMap="pssCommTotalMap">
+        SELECT c2.*
+        FROM pss_comm_total c2
+        where c2.parent_code = #{parentCode}
+        and c2.data_flag=0
+        LIMIT #{param.start}, #{param.pageSize}
+    </select>
+
+    <select id="findCommCountByLevelCode2" resultType="java.lang.Integer">
+        SELECT count(c2.comm_id)
+        FROM pss_comm_total c2
+        where c2.parent_code = #{parentCode}
+        and c2.data_flag=0
+    </select>
+
+    <select id="getType1CommBySubCommId" resultType="io.dfjinxin.modules.price.entity.PssCommTotalEntity">
+        select pct.*
+        from pss_comm_total pct
+        where comm_id in (
+            select parent_code
+            from pss_comm_total
+            where comm_id in (
+                select parent_code
+                from pss_comm_total
+                where comm_id = #{commId}))
+
+    </select>
+    <select id="getDistinctSameParentCode" resultType="io.dfjinxin.modules.price.entity.PssCommTotalEntity">
+        select distinct parent_code from pss_comm_total
+        where comm_id in (#{commIds})
+    </select>
+
+
+</mapper>

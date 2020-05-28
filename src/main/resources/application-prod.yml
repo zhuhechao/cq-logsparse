@@ -1,0 +1,38 @@
+spring:
+    profiles:
+        include: db
+
+mysql:
+    url: jdbc:mysql://172.20.10.69:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+
+hive:
+    user: hdfs
+    password:
+    url: jdbc:hive2://172.20.10.63:10000/
+    driver-class-name: org.apache.hive.jdbc.HiveDriver
+    filters: stat
+    initialSize: 2
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 500
+
+#远程服务python配置
+python:
+    #    数据集创建、相关性分析
+    url: http://172.20.10.207:8082/
+    #    模型管理
+    url2: http://172.20.10.207:8092
+
+#腾讯接口配置
+tengxun:
+    path: https://jianguan.urlsec.qq.com/
+    appId: fagaiwei
+    pwd: fgwprice

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.dfjinxin.modules.sys.dao.SysRoleMenuDao">
+
+	<sql id="where">
+		1=1
+		<if test="m.menu_id != null  and m.menu_id != '' and m.menu_id != 'null'"><![CDATA[
+	       and pmf.menu_id = #{m.menu_id}
+	    ]]></if>
+		<if test="m.pare_menu_id != null and m.pare_menu_id != ''  and m.pare_menu_id != 'null'"><![CDATA[
+	       and pmf.pare_menu_id = #{m.pare_menu_id}
+	    ]]></if>
+		<if test="m.menu_name != null and m.menu_name != '' and m.menu_name != 'null'"><![CDATA[
+	       and pmf.menu_name = #{m.menu_name}
+	    ]]></if>
+		<if test="m.menu_state != null and m.menu_state != ''"><![CDATA[
+	       and pmf.menu_state = #{m.menu_state}
+	    ]]></if>
+		<if test="m.cre_time != null and m.cre_time != ''"><![CDATA[
+	       and pmf.cre_time >= #{m.cre_time}
+	    ]]></if>
+		<if test="m.upd_time != null and m.upd_time != ''"><![CDATA[
+	       and pmf.upd_time >= #{m.upd_time}
+	    ]]></if>
+	</sql>
+	
+	<select id="queryMenuList" parameterType="map" resultType="map">
+		SELECT pmi.*
+		,p.role_id
+		FROM (SELECT * FROM pss_menu_info WHERE menu_state = 1 ) pmi
+		JOIN pss_role_perm_info p ON pmi.menu_id = p.menu_id
+		WHERE  p.role_id = #{m.role_id}
+	</select>
+
+	<delete id="deleteBatch">
+		delete from pss_role_perm_info where role_id in
+		<foreach item="roleId" collection="list" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+
+	<select id="select" parameterType="map" resultType="map">
+		select * from (select * from pss_menu_info where menu_state = 1 ) pmf
+		<where>
+			<include refid="where" />
+		</where>
+	</select>
+
+</mapper>
