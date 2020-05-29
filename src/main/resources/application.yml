@@ -35,5 +35,5 @@ spring:
 #    upload: /upload
 #
 ##启用CA登录配置
-#ca:
-#  valid: true
+ca:
+  valid: false

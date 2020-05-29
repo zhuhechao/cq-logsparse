@@ -36,7 +36,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
             //加了ApiOperation注解的类，才生成接口文档
 //            .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
             //包下的类，才生成接口文档
-            .apis(RequestHandlerSelectors.basePackage("io.dfjinxin.modules"))
+            .apis(RequestHandlerSelectors.basePackage("io.dfjinxin.modules.sys"))
             .paths(PathSelectors.any())
             .build();
             //.securitySchemes(security());
@@ -44,8 +44,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("东方金信")
-            .description("发改委项目-API文档")
+            .title("重庆-数据共享平台")
+            .description("API文档")
             .termsOfServiceUrl("http://www.seaboxdata.com")
             .version("3.0.0")
             .build();

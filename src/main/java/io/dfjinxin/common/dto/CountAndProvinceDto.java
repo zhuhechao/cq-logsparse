@@ -1,6 +1,5 @@
 package io.dfjinxin.common.dto;
 
-import io.dfjinxin.modules.analyse.entity.WpMcroIndexValEntity;
 import lombok.Data;
 
 import java.util.List;
