@@ -11,6 +11,6 @@ public class SpringBootStartApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(FaGaiWeiApplication.class);
+        return builder.sources(CqLogParseApplication.class);
     }
 }

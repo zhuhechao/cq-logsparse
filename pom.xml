@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.dfjinxin</groupId>
-	<artifactId>dfjinxin-fagaiwei</artifactId>
+	<artifactId>cq-logsparse</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	<description>dfjinxin-fagaiwei</description>
+	<description>cq-logsparse</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,17 +42,13 @@
 		<quartz.version>2.3.0</quartz.version>
 		<poi.version>3.14</poi.version>
 		<!--打包时跳过测试-->
-		<!--<skipTests>true</skipTests>-->
+		<skipTests>true</skipTests>
 		<!--打包名称-->
-		<projectname>fagaiwei_api</projectname>
+		<projectname>cq-logsparse</projectname>
 
 	</properties>
 
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -277,15 +273,6 @@
 			</exclusions>
 		</dependency>
 
-		<!--发改单点登陆验证jar-->
-		<dependency>
-			<groupId>com.fg.price</groupId>
-			<artifactId>dingdang</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/fglib/JWT-SDK-1.0.jar</systemPath>
-		</dependency>
-
 		<dependency>
 			<groupId>org.bitbucket.b_c</groupId>
 			<artifactId>jose4j</artifactId>
@@ -305,12 +292,6 @@
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
 		</dependency>
-
-<!--		<dependency>-->
-<!--			<groupId>org.python</groupId>-->
-<!--			<artifactId>jython-standalone</artifactId>-->
-<!--			<version>2.7.1</version>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.rosuda.REngine</groupId>
@@ -397,6 +378,7 @@
 				</configuration>
 			</plugin>
 
+<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -413,6 +395,7 @@
 
 				</configuration>
 			</plugin>
+-->
 		</plugins>
 	</build>
 

@@ -10,7 +10,7 @@ import io.dfjinxin.modules.analyse.dao.WpBaseIndexValDao;
 import io.dfjinxin.modules.analyse.entity.WpBaseIndexValEntity;
 import io.dfjinxin.modules.analyse.service.WpBaseIndexValService;
 import io.dfjinxin.modules.analyse.service.WpPubOmService;
-import io.dfjinxin.modules.price.controller.PssDatasetInfoController;
+//import io.dfjinxin.modules.price.controller.PssDatasetInfoController;
 import io.dfjinxin.modules.price.entity.PssDatasetInfoEntity;
 import io.dfjinxin.modules.price.service.PssPriceEwarnService;
 import org.junit.Test;
@@ -33,10 +33,10 @@ import java.util.Map;
 @WebAppConfiguration
 public class SysMenuServiceImplTest {
 
-    @Autowired
-    private PssPriceEwarnService pssPriceEwarnService;
-    @Autowired
-    private PssDatasetInfoController controller;
+//    @Autowired
+//    private PssPriceEwarnService pssPriceEwarnService;
+//    @Autowired
+//    private PssDatasetInfoController controller;
     @Autowired
     private WpPubOmService wpPubOmService;
 
@@ -45,7 +45,7 @@ public class SysMenuServiceImplTest {
 
     @Test
     public void pssPriceEwarnService() {
-        pssPriceEwarnService.secondPageDetail(44);
+//        pssPriceEwarnService.secondPageDetail(44);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class SysMenuServiceImplTest {
         String josnStr = "{\"indexIds\":[1,2,4,5]}";
         entity.setIndeVar(josnStr);
         System.out.println("indevar is : " + entity.getIndeVar());
-        controller.saveDataSet(entity);
+//        controller.saveDataSet(entity);
     }
 
     @Test

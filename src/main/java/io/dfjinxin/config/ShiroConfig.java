@@ -69,7 +69,7 @@ public class ShiroConfig {
         filterMap.put("/swagger-ui.html", "anon");
         filterMap.put("/swagger-resources/**", "anon");
         filterMap.put("/v2/api-docs/**", "anon");
-        filterMap.put("/fagaiwei_api/swagger-ui.html/**", "anon");
+        filterMap.put("/cq-logsparse/swagger-ui.html/**", "anon");
         filterMap.put("/**", "oauth2");
 
         shiroFilter.setFilterChainDefinitionMap(filterMap);

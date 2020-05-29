@@ -24,10 +24,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableCaching
 @EnableConfigurationProperties({AppProperties.class, AppPathProperties.class, ModulePathProperties.class})
-public class FaGaiWeiApplication {
+public class CqLogParseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FaGaiWeiApplication.class, args);
+		SpringApplication.run(CqLogParseApplication.class, args);
 	}
 
 }

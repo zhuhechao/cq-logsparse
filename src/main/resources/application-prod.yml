@@ -24,15 +24,15 @@ hive:
     poolPreparedStatements: false
     maxPoolPreparedStatementPerConnectionSize: 500
 
-#远程服务python配置
-python:
-    #    数据集创建、相关性分析
-    url: http://172.20.10.207:8082/
-    #    模型管理
-    url2: http://172.20.10.207:8092
-
-#腾讯接口配置
-tengxun:
-    path: https://jianguan.urlsec.qq.com/
-    appId: fagaiwei
-    pwd: fgwprice
+##远程服务python配置
+#python:
+#    #    数据集创建、相关性分析
+#    url: http://172.20.10.207:8082/
+#    #    模型管理
+#    url2: http://172.20.10.207:8092
+#
+##腾讯接口配置
+#tengxun:
+#    path: https://jianguan.urlsec.qq.com/
+#    appId: fagaiwei
+#    pwd: fgwprice

@@ -33,11 +33,11 @@ import java.util.*;
 public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, ScheduleJobEntity> implements ScheduleJobService {
 	@Autowired
     private Scheduler scheduler;
-	
+
 	/**
 	 * 项目启动时，初始化定时器
 	 */
-	@PostConstruct
+//	@PostConstruct
 	@Transactional(rollbackFor = Exception.class)
 	public void init(){
 		List<ScheduleJobEntity> scheduleJobList = this.list();
@@ -83,15 +83,15 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 		scheduleJob.setCreateTime(new Date());
 		scheduleJob.setStatus(Constant.ScheduleStatus.NORMAL.getValue());
         this.save(scheduleJob);
-        
+
         ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
     }
-	
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(ScheduleJobEntity scheduleJob) {
         ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
-                
+
         this.updateById(scheduleJob);
     }
 
@@ -101,7 +101,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
     	for(Long jobId : jobIds){
     		ScheduleUtils.deleteScheduleJob(scheduler, jobId);
     	}
-    	
+
     	//删除数据
     	this.removeByIds(Arrays.asList(jobIds));
 	}
@@ -113,7 +113,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
     	map.put("status", status);
     	return baseMapper.updateBatch(map);
     }
-    
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
     public void run(Long[] jobIds) {
@@ -128,7 +128,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
         for(Long jobId : jobIds){
     		ScheduleUtils.pauseJob(scheduler, jobId);
     	}
-        
+
     	updateBatch(jobIds, Constant.ScheduleStatus.PAUSE.getValue());
     }
 
@@ -141,5 +141,5 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 
     	updateBatch(jobIds, Constant.ScheduleStatus.NORMAL.getValue());
     }
-    
+
 }
