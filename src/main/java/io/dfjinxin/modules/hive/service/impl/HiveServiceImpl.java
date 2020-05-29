@@ -105,4 +105,9 @@ public class HiveServiceImpl implements HiveService {
         jdbcTemplate.execute(sql);
     }
 
+    @Override
+    public void insert(String sql) {
+        this.jdbcTemplate.execute(sql);
+    }
+
 }

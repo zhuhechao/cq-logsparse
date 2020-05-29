@@ -45,7 +45,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("重庆-数据共享平台")
-            .description("API文档")
+            .description("日志解析-Api")
             .termsOfServiceUrl("http://www.seaboxdata.com")
             .version("3.0.0")
             .build();

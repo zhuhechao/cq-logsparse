@@ -19,4 +19,13 @@ public interface HiveService {
     * @Date: 2019/11/22 17:02
     */
     void dropTable(String tableName);
+
+    /**
+    * @Desc:  hive insert操作
+    * @Param: [sql]
+    * @Return: boolean
+    * @Author: z.h.c
+    * @Date: 2020/5/29 20:06
+    */
+    void insert (String sql);
 }

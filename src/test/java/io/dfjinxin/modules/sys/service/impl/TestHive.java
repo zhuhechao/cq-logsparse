@@ -1,6 +1,7 @@
 package io.dfjinxin.modules.sys.service.impl;
 
 import io.dfjinxin.modules.hive.service.HiveService;
+import io.dfjinxin.modules.logs.LogsParseController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,13 @@ public class TestHive {
 
     @Autowired
     private HiveService hiveService;
+    @Autowired
+    private LogsParseController logsParseController;
+
+    @Test
+    public void testcon(){
+        logsParseController.doLogsFileParse();
+    }
 
     @Test
     public void testquery() {

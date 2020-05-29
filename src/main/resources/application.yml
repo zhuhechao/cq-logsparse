@@ -34,6 +34,9 @@ spring:
 #    temp: /temp
 #    upload: /upload
 #
-##启用CA登录配置
-ca:
-  valid: false
+###启用CA登录配置
+#ca:
+#  valid: false
+
+file:
+  path: D:\

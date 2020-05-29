@@ -28,8 +28,8 @@ import java.util.Map;
 public abstract class AbstractController {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Value("${ca.valid}")
-	private boolean caVaid;
+//	@Value("${ca.valid}")
+	private boolean caVaid =false;
 
 	protected String getUserId() {
 		if(caVaid){
