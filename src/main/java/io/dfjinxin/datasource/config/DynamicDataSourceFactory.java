@@ -1,9 +1,5 @@
 /**
  * 2019 东方金信
- *
- *
- *
- *
  */
 
 package io.dfjinxin.datasource.config;
@@ -21,7 +17,8 @@ import java.sql.SQLException;
  */
 public class DynamicDataSourceFactory {
 
-    public static DruidDataSource buildDruidDataSource(DataSourceProperties properties) {
+    public static DruidDataSource buildDruidDataSource(Object props) {
+        DataSourceProperties properties = (DataSourceProperties) props;
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(properties.getDriverClassName());
         druidDataSource.setUrl(properties.getUrl());

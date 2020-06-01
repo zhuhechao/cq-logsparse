@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@DataSource("hiveSource")
+@DataSource("HiveDataSource")
+//@DataSource("hiveSource")
 public class HiveServiceImpl implements HiveService {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());

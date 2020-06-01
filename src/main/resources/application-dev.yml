@@ -1,11 +1,14 @@
 spring:
     profiles:
-        include: db
+        include: db-rps,db-auth
 
 mysql:
-      url: jdbc:mysql://localhost:3306/zhjg_0224?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
-      username: root
-      password: root
+      url-rsp: jdbc:mysql://109.244.99.167:30001/rsp_server_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+      username-rsp: root
+      password-rsp: P@ssw0rd
+      url-auth: jdbc:mysql://109.244.99.167:30001/auth_server_deploy?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username-auth: root
+      password-auth: P@ssw0rd
 
 hive:
     #  公司测试环境

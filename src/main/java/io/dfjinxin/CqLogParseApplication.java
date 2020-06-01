@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan(value = "io.dfjinxin.**.dao")
 @EnableTransactionManagement
 @EnableCaching
-@EnableConfigurationProperties({/*AppProperties.class, */AppPathProperties.class, ModulePathProperties.class})
+@EnableConfigurationProperties({AppPathProperties.class, ModulePathProperties.class})
 public class CqLogParseApplication {
 
 	public static void main(String[] args) {

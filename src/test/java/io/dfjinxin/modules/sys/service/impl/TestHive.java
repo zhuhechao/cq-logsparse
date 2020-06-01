@@ -1,7 +1,7 @@
 package io.dfjinxin.modules.sys.service.impl;
 
 import io.dfjinxin.modules.hive.service.HiveService;
-import io.dfjinxin.modules.logs.LogsParseController;
+import io.dfjinxin.modules.logs.controller.LogsParseController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @Desc:
