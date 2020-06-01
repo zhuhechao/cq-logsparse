@@ -29,7 +29,7 @@ public class TestHive {
 
     @Test
     public void testcon(){
-        logsParseController.doLogsFileParse();
+        logsParseController.doLogsFileParse(null);
     }
 
     @Test
