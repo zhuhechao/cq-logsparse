@@ -1,6 +1,6 @@
 spring:
     profiles:
-        include: db
+        include: ds
 
 mysql:
     url: jdbc:mysql://172.20.10.69:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull

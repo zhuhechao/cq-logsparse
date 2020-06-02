@@ -3,9 +3,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: ${mysql.url-auh}
-      username: ${mysql.username-auth}
-      password: ${mysql.password-auth}
+      url: ${mysql.url}
+      username: ${mysql.username}
+      password: ${mysql.password}
       initial-size: 10
       max-active: 100
       min-idle: 10

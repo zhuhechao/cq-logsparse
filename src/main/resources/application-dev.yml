@@ -1,42 +1,30 @@
 spring:
-    profiles:
-        include: db-rps,db-auth
+  profiles:
+    include: ds
 
 mysql:
-      url-rsp: jdbc:mysql://109.244.99.167:30001/rsp_server_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-      username-rsp: root
-      password-rsp: P@ssw0rd
-      url-auth: jdbc:mysql://109.244.99.167:30001/auth_server_deploy?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-      username-auth: root
-      password-auth: P@ssw0rd
+  #url: jdbc:mysql://localhost:3306/zhjg_0224?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
+  #username: root
+  #password: root
+  url: jdbc:mysql://109.244.99.167:30001/rsp_server_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+  username: root
+  password: P@ssw0rd
 
 hive:
-    #  公司测试环境
-    user: hdfs
-    password:
-    url: jdbc:hive2://10.1.3.238:10000/
-    driver-class-name: org.apache.hive.jdbc.HiveDriver
-    filters: stat
-    initialSize: 2
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 500
+  #  公司测试环境
+  user: hdfs
+  password:
+  url: jdbc:hive2://10.1.3.238:10000/
+  driver-class-name: org.apache.hive.jdbc.HiveDriver
+  filters: stat
+  initialSize: 2
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 1
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: false
+  maxPoolPreparedStatementPerConnectionSize: 500
 
-##远程服务python配置
-#python:
-#    #    数据集创建、相关性分析
-#    url: http://10.1.3.239:8082/
-#    #    模型管理
-#    url2: http://10.1.3.239:8092
-#
-##腾讯接口配置
-#tengxun:
-#    path: https://jianguan.urlsec.qq.com/
-#    appId: fagaiwei
-#    pwd: fgwprice

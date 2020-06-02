@@ -1,7 +1,6 @@
 package io.dfjinxin.modules.hive.service.impl;
 
 import io.dfjinxin.common.exception.RRException;
-import io.dfjinxin.config.SystemParams;
 import io.dfjinxin.datasource.annotation.DataSource;
 import io.dfjinxin.modules.hive.service.HiveService;
 import org.apache.commons.lang.StringUtils;
@@ -14,15 +13,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+//import io.dfjinxin.config.SystemParams;
+
 @Service
-@DataSource("HiveDataSource")
-//@DataSource("hiveSource")
+@DataSource("hiveSource")
 public class HiveServiceImpl implements HiveService {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
     private final static String SQL_IMPALA = "impala";
-    @Autowired
-    private SystemParams systemParams;
+//    @Autowired
+//    private SystemParams systemParams;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
