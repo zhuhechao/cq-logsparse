@@ -400,24 +400,41 @@ public class DateUtils {
         return dateList;
     }
 
-    public static void main(String[] args) {
-
-
-        String start = "2019-11-01";
-        String end = "2019-11-19";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dStart = null;
-        Date dEnd = null;
+    public static String conver8GMTtoStr(String dateStr) {
+//        String dateStr = "27/May/2020:14:37:02 +0800";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
+        Date dateTrans = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            dStart = sdf.parse(start);
-            dEnd = sdf.parse(end);
+            formatter.parse(dateStr);
+            dateTrans = formatter.parse(dateStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        List<Date> dateList = getDates(dStart, dEnd);
-        for (Date date : dateList) {
-            System.out.println(sdf.format(date));
-        }
+        return format.format(dateTrans);
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(conver8GMTtoStr("27/May/2020:10:37:02 +0800"));
+//        System.out.println(conver8T("27/May/2020:19:37:02 +0800"));
+
+
+//        String start = "2019-11-01";
+//        String end = "2019-11-19";
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dStart = null;
+//        Date dEnd = null;
+//        try {
+//            dStart = sdf.parse(start);
+//            dEnd = sdf.parse(end);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        List<Date> dateList = getDates(dStart, dEnd);
+//        for (Date date : dateList) {
+//            System.out.println(sdf.format(date));
+//        }
 
 
 //        System.out.println(DateUtils.getLastMonthFirstDayStr());
