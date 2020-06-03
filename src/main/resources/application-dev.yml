@@ -6,9 +6,9 @@ mysql:
   #url: jdbc:mysql://localhost:3306/zhjg_0224?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
   #username: root
   #password: root
-  url: jdbc:mysql://109.244.99.167:30001/rsp_server_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-  username: root
-  password: P@ssw0rd
+    url: jdbc:mysql://109.244.99.167:30001/oracle_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: P@ssw0rd
 
 hive:
   #  公司测试环境

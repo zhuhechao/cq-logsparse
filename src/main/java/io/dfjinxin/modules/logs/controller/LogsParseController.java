@@ -2,9 +2,11 @@ package io.dfjinxin.modules.logs.controller;
 
 import io.dfjinxin.common.utils.DateUtils;
 import io.dfjinxin.common.utils.R;
+import io.dfjinxin.modules.logs.service.LogsParseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,9 @@ public class LogsParseController {
     @Value("${file.path}")
     private String path;
 
+    @Autowired
+    private LogsParseService logsParseService;
+
     /**
      * @Desc: 根据文件目录path、文件名称name（access-系统当前日期.log）解析文件，并落入hive库
      * @Param: [dateStr]
@@ -51,11 +56,12 @@ public class LogsParseController {
         String fileName = "access_" + dateStr + ".log";
         log.info("数据共享日志文件分析,params- filepath:{},filename:{}", path, fileName);
         String fileLine = "";
+        int parseLogCount = 0;
         try {
             FileInputStream inputStream = new FileInputStream("D://" + fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while ((fileLine = bufferedReader.readLine()) != null) {
-                this.subFileLineStrParse(fileLine);
+                parseLogCount += this.subFileLineStrParse(fileLine);
             }
             inputStream.close();
             bufferedReader.close();
@@ -64,6 +70,7 @@ public class LogsParseController {
             log.error(errMsg);
             return R.ok(errMsg);
         }
+        log.info("文件{},共处理{}条记录!", fileName, parseLogCount);
 
         return R.ok();
     }
@@ -91,8 +98,9 @@ public class LogsParseController {
      *
      * @param fileLineStr
      */
-    private void subFileLineStrParse(String fileLineStr) {
+    private int subFileLineStrParse(String fileLineStr) {
 //        subFileLineStr = "23.52.0.9 - - [24/Apr/2020:18:40:37 +0800] \"GET /services/RES_SFZGGWOH/jngl/56poInJfKmiNX2no1JRdW4w2TibZB5FrYyV5QlbShqU/getDataJson?pageNo=1&pageSize=20&search= HTTP/1.1\" 200 1391 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36\" \"-\"";
+        int parseLogCount = 0;
         if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\" 200")) {
             String[] subFileLineStrArr = fileLineStr.split("\\?");
             String subFileLineStr = subFileLineStrArr[0];
@@ -109,7 +117,10 @@ public class LogsParseController {
             log.info("date = " + date);
             log.info("serviceCode = " + serviceCode);
             log.info("resourceCode = " + resourceCode);
+            logsParseService.insertHive(ip, date, serviceCode);
+            parseLogCount = 1;
         }
+        return parseLogCount;
     }
 
     public static void main(String[] args) {
