@@ -37,6 +37,3 @@ spring:
 ###启用CA登录配置
 #ca:
 #  valid: false
-
-file:
-  path: D:\

@@ -8,12 +8,12 @@ mysql:
     password: 123456
 
 hive:
-    user: hdfs
-    password:
-    url: jdbc:hive2://172.20.10.63:10000/
+    user: gx_user
+    password: 1qaz2wsx
+    url: jdbc:hive2://172.16.12.60:10000/cqlog
     driver-class-name: org.apache.hive.jdbc.HiveDriver
     filters: stat
-    initialSize: 2
+    initialSize: 5
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
@@ -24,15 +24,5 @@ hive:
     poolPreparedStatements: false
     maxPoolPreparedStatementPerConnectionSize: 500
 
-##远程服务python配置
-#python:
-#    #    数据集创建、相关性分析
-#    url: http://172.20.10.207:8082/
-#    #    模型管理
-#    url2: http://172.20.10.207:8092
-#
-##腾讯接口配置
-#tengxun:
-#    path: https://jianguan.urlsec.qq.com/
-#    appId: fagaiwei
-#    pwd: fgwprice
+file:
+    path: /home/fhv/data/logs/api

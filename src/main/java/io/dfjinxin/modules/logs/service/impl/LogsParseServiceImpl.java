@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-
 /**
  * @Desc:
  * @Author: z.h.c
@@ -63,21 +61,23 @@ public class LogsParseServiceImpl implements LogsParseService {
         Assert.notNull(sepOrgEntity, "*** sep_org不存在资源提供方机构:" + diDataitemEntity.getOrgId());
 
         StringBuilder sb = new StringBuilder("insert into resource_invoke_logs " +
-                "(log_id,invoker_ip,invoker_org_name,invoker_user_name," +
+                "(log_id,invoker_ip,invoker_user_id,invoker_org_name,invoker_user_name," +
                 "invoke_date," +
-                "resourcer_org_name,resource_name,dataitem_id) values (");
+                "resourcer_org_name,resource_name,dataitem_id,create_time) values (");
 
 
         final String flag = "',";
         final String flag2 = "'";
         sb.append(System.currentTimeMillis()).append(",");
         sb.append(flag2).append(ip).append(flag);
+        sb.append(entityUser.getUserId()).append(",");
         sb.append(flag2).append(userOrgEntity.getName()).append(flag);
         sb.append(flag2).append(entityUser.getUserName()).append(flag);
         sb.append(flag2).append(date).append(flag);
         sb.append(flag2).append(sepOrgEntity.getName()).append(flag);
         sb.append(flag2).append(diDataitemEntity.getName()).append(flag);
-        sb.append(diDataitemEntity.getDataitemId());
+        sb.append(diDataitemEntity.getDataitemId()).append(",");
+        sb.append(flag2).append(DateUtils.getCurrentYMDHMSStr()).append("'");
         sb.append(" );");
         log.info("hive sql:{}", sb.toString());
 

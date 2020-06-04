@@ -28,3 +28,5 @@ hive:
   poolPreparedStatements: false
   maxPoolPreparedStatementPerConnectionSize: 500
 
+file:
+  path: D:\

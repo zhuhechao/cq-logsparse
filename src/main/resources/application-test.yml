@@ -3,9 +3,12 @@ spring:
         include: ds
 
 mysql:
-    url: jdbc:mysql://10.1.0.139:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://10.1.0.139:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    username: root
+#    password: 123456
+    url: jdbc:mysql://109.244.99.167:30001/oracle_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: P@ssw0rd
 
 hive:
     #  公司测试环境
@@ -25,15 +28,5 @@ hive:
     poolPreparedStatements: false
     maxPoolPreparedStatementPerConnectionSize: 500
 
-##远程服务python配置
-#python:
-##    数据集创建、相关性分析
-#    url: http://10.1.3.239:8082/
-##    模型管理
-#    url2: http://10.1.3.239:8092
-#
-##腾讯接口配置
-#tengxun:
-#    path: https://jianguan.urlsec.qq.com/
-#    appId: fagaiwei
-#    pwd: fgwprice
+file:
+    path: /home/fhv/data/logs/api/daily-logs/

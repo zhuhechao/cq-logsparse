@@ -61,7 +61,7 @@ public class LogsParseController {
         String fileLine = "";
         int parseLogCount = 0;
         try {
-            FileInputStream inputStream = new FileInputStream("D://" + fileName);
+            FileInputStream inputStream = new FileInputStream(path + fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while ((fileLine = bufferedReader.readLine()) != null) {
                 try {
@@ -132,11 +132,11 @@ public class LogsParseController {
         return parseLogCount;
     }
 
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
 
 //        Fri, 18 Oct 2013 11:38:23 GMT
 
-        String datdString="27/May/2020:14:37:02 +0800";
+        String datdString = "27/May/2020:14:37:02 +0800";
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
         formatter.parse(datdString);
         Date dateTrans = formatter.parse(datdString);
