@@ -1,6 +1,5 @@
 package io.dfjinxin.modules.logs.service.impl;
 
-import com.google.common.collect.Lists;
 import io.dfjinxin.common.utils.DateUtils;
 import io.dfjinxin.modules.hive.service.HiveService;
 import io.dfjinxin.modules.logs.entity.*;
@@ -12,7 +11,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Desc:
@@ -94,7 +92,6 @@ public class LogsParseServiceImpl implements LogsParseService {
     public ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode) {
         log.info("ip:{},date:{},serviceCode:{}", ip, date, serviceCode);
 
-        long startTime = System.currentTimeMillis();
         if (StringUtils.isEmpty(ip) || StringUtils.isEmpty(date) || StringUtils.isEmpty(serviceCode)) {
             return null;
         }

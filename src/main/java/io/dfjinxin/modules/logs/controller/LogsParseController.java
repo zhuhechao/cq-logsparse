@@ -1,6 +1,5 @@
 package io.dfjinxin.modules.logs.controller;
 
-import com.google.common.collect.Lists;
 import io.dfjinxin.common.utils.DateUtils;
 import io.dfjinxin.common.utils.R;
 import io.dfjinxin.modules.logs.entity.ResourceInvokeLogsEntity;
@@ -11,7 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -65,6 +67,7 @@ public class LogsParseController {
         log.info("数据共享日志文件分析,params- filepath:{},filename:{}", path, fileName);
         String fileLine = "";
         List<ResourceInvokeLogsEntity> list = new ArrayList<>();
+        long startT = System.currentTimeMillis();
         try {
             FileInputStream inputStream = new FileInputStream(path + fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -84,9 +87,9 @@ public class LogsParseController {
             log.error(errMsg);
             return R.ok(errMsg);
         }
-        log.info("从文件{},共解析{}条记录!", fileName, list.size());
-        resourceInvokeLogsService.insertBatchByList(list);
-
+        long endT = System.currentTimeMillis();
+        log.info("从文件:{},共解析:{}条记录,用时:{}s!", fileName, list.size(), (endT - startT) / 1000);
+        this.resourceInvokeLogsService.insertBatchByList(list);
         return R.ok();
     }
 
@@ -115,8 +118,6 @@ public class LogsParseController {
      */
     private ResourceInvokeLogsEntity subFileLineStrParse(String fileLineStr) {
 //        subFileLineStr = "23.52.0.9 - - [24/Apr/2020:18:40:37 +0800] \"GET /services/RES_SFZGGWOH/jngl/56poInJfKmiNX2no1JRdW4w2TibZB5FrYyV5QlbShqU/getDataJson?pageNo=1&pageSize=20&search= HTTP/1.1\" 200 1391 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36\" \"-\"";
-//        int parseLogCount = 0;
-//        List list = Lists.newArrayList();
         if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\" 200")) {
             String[] subFileLineStrArr = fileLineStr.split("\\?");
             String subFileLineStr = subFileLineStrArr[0];
