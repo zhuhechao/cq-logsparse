@@ -3,9 +3,12 @@ spring:
         include: ds
 
 mysql:
-    url: jdbc:mysql://172.20.10.69:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: 123456
+#    url: jdbc:mysql://172.20.10.69:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
+#    username: root
+#    password: 123456
+    url: jdbc:mysql://172.16.12.44:3306/oracle_data?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: jinxin
+    password: P@ssw0rd
 
 hive:
     user: gx_user
@@ -25,4 +28,4 @@ hive:
     maxPoolPreparedStatementPerConnectionSize: 500
 
 file:
-    path: /home/fhv/data/logs/api
+    path: /data/logs/api/daliy_log/

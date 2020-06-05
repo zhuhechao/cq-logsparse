@@ -1,8 +1,11 @@
 package io.dfjinxin.modules.logs.controller;
 
+import com.google.common.collect.Lists;
 import io.dfjinxin.common.utils.DateUtils;
 import io.dfjinxin.common.utils.R;
+import io.dfjinxin.modules.logs.entity.ResourceInvokeLogsEntity;
 import io.dfjinxin.modules.logs.service.LogsParseService;
+import io.dfjinxin.modules.logs.service.ResourceInvokeLogsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Desc: 数据共享日志分析-日志文件处理
@@ -39,6 +40,10 @@ public class LogsParseController {
     @Autowired
     private LogsParseService logsParseService;
 
+    @Autowired
+    private
+    ResourceInvokeLogsService resourceInvokeLogsService;
+
     /**
      * @Desc: 根据文件目录path、文件名称name（access-系统当前日期.log）解析文件，并落入hive库
      * @Param: [dateStr]
@@ -59,13 +64,14 @@ public class LogsParseController {
         String fileName = "access_" + dateStr + ".log";
         log.info("数据共享日志文件分析,params- filepath:{},filename:{}", path, fileName);
         String fileLine = "";
-        int parseLogCount = 0;
+        List<ResourceInvokeLogsEntity> list = new ArrayList<>();
         try {
             FileInputStream inputStream = new FileInputStream(path + fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             while ((fileLine = bufferedReader.readLine()) != null) {
                 try {
-                    parseLogCount += this.subFileLineStrParse(fileLine);
+                    ResourceInvokeLogsEntity logsEntity = this.subFileLineStrParse(fileLine);
+                    if (logsEntity != null) list.add(logsEntity);
                 } catch (Exception e) {
                     log.error(e.getMessage());
                     continue;
@@ -78,7 +84,8 @@ public class LogsParseController {
             log.error(errMsg);
             return R.ok(errMsg);
         }
-        log.info("从文件{},共解析{}条记录!", fileName, parseLogCount);
+        log.info("从文件{},共解析{}条记录!", fileName, list.size());
+        resourceInvokeLogsService.insertBatchByList(list);
 
         return R.ok();
     }
@@ -106,30 +113,28 @@ public class LogsParseController {
      *
      * @param fileLineStr
      */
-    private int subFileLineStrParse(String fileLineStr) {
+    private ResourceInvokeLogsEntity subFileLineStrParse(String fileLineStr) {
 //        subFileLineStr = "23.52.0.9 - - [24/Apr/2020:18:40:37 +0800] \"GET /services/RES_SFZGGWOH/jngl/56poInJfKmiNX2no1JRdW4w2TibZB5FrYyV5QlbShqU/getDataJson?pageNo=1&pageSize=20&search= HTTP/1.1\" 200 1391 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36\" \"-\"";
-        int parseLogCount = 0;
+//        int parseLogCount = 0;
+//        List list = Lists.newArrayList();
         if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\" 200")) {
             String[] subFileLineStrArr = fileLineStr.split("\\?");
             String subFileLineStr = subFileLineStrArr[0];
 
             String ip = subFileLineStr.substring(0, subFileLineStr.indexOf("-")).trim();
             String date = subFileLineStr.substring(subFileLineStr.indexOf("[") + 1, subFileLineStr.indexOf("]")).trim();
-//            String date = time.substring(0, time.indexOf("+")).trim();
             String[] serverUrlArr = subFileLineStr.split("]");
             String serverUrlStr = serverUrlArr[1];
             String[] serverPathArr = serverUrlStr.split("/");
             String serviceCode = serverPathArr[2];
             String resourceCode = serverPathArr[3];
-            date = DateUtils.conver8GMTtoStr(date);
             log.info("ip = " + ip);
             log.info("date = " + date);
             log.info("serviceCode = " + serviceCode);
             log.info("resourceCode = " + resourceCode);
-            logsParseService.insertHive(ip, date, serviceCode);
-            parseLogCount = 1;
+            return logsParseService.queryDataByParams(ip, date, serviceCode);
         }
-        return parseLogCount;
+        return null;
     }
 
     public static void main(String[] args) throws Exception {

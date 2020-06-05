@@ -1,5 +1,7 @@
 package io.dfjinxin.modules.logs.service;
 
+import io.dfjinxin.modules.logs.entity.ResourceInvokeLogsEntity;
+
 /**
  * @Desc:
  * @Author: z.h.c
@@ -8,5 +10,7 @@ package io.dfjinxin.modules.logs.service;
  */
 public interface LogsParseService {
 
-    void insertHive(String ip, String date, String serviceCode);
+    void insertLog(String ip, String date, String serviceCode);
+
+    ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode);
 }

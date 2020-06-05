@@ -263,6 +263,7 @@ public class DateUtils {
     }
 
 
+
     /**
      * 获取当月的 天数
      */
@@ -420,7 +421,7 @@ public class DateUtils {
     * @Author: z.h.c
     * @Date: 2020/6/4 10:55
     */
-    public static String conver8GMTtoStr(String dateStr) {
+    public static String conver8GMT2Str(String dateStr) {
 //        String dateStr = "27/May/2020:14:37:02 +0800";
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
         Date dateTrans = null;
@@ -434,10 +435,25 @@ public class DateUtils {
         return format.format(dateTrans);
     }
 
+    public static Date conver8GMT2Date(String dateStr) {
+//        String dateStr = "27/May/2020:14:37:02 +0800";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
+        Date dateTrans = null;
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            formatter.parse(dateStr);
+            dateTrans = formatter.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateTrans;
+    }
+
     public static void main(String[] args) {
 
-//        System.out.println(conver8GMTtoStr("27/May/2020:10:37:02 +0800"));
-        System.out.println(getCurrentYMDHMSStr());
+        System.out.println(conver8GMT2Str("27/May/2020:10:37:02 +0800"));
+//        System.out.println(getCurrentYMDHMSStr());
+        System.out.println(conver8GMT2Date("27/May/2020:10:37:02 +0800"));
 //        System.out.println(conver8T("27/May/2020:19:37:02 +0800"));
 
 
