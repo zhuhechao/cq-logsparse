@@ -13,5 +13,6 @@ import io.dfjinxin.modules.logs.entity.SepUserEntity;
 public interface SepUserService extends IService<SepUserEntity> {
 
     SepUserEntity getEntityByUserId(Long userId);
+    SepUserEntity getEntityByFixIp(String fixIp);
 }
 

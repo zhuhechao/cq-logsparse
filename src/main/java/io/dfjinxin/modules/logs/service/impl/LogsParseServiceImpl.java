@@ -96,11 +96,11 @@ public class LogsParseServiceImpl implements LogsParseService {
             return null;
         }
 
-        SepUserFixipHistoryEntity entityByFixIp = sepUserFixipHistoryService.getEntityByFixIp(ip);
-        Assert.notNull(entityByFixIp, "*** sep_user_fixip_history不存在:" + ip);
+//        SepUserFixipHistoryEntity entityByFixIp = sepUserFixipHistoryService.getEntityByFixIp(ip);
+//        Assert.notNull(entityByFixIp, "*** sep_user_fixip_history不存在:" + ip);
 
-        SepUserEntity entityUser = sepUserService.getEntityByUserId(entityByFixIp.getUserId());
-        Assert.notNull(entityUser, "*** sep_user不存在:" + entityByFixIp.getUserId());
+        SepUserEntity entityUser = sepUserService.getEntityByFixIp(ip);
+        Assert.notNull(entityUser, "*** sep_user不存在:" + ip);
 
         SepOrgEntity userOrgEntity = sepOrgService.getEntity(entityUser.getOrgId());
         Assert.notNull(userOrgEntity, "***sep_org不存在调用方用户机构:" + entityUser.getOrgId());

@@ -137,37 +137,4 @@ public class LogsParseController {
         }
         return null;
     }
-
-    public static void main(String[] args) throws Exception {
-
-//        Fri, 18 Oct 2013 11:38:23 GMT
-
-        String datdString = "27/May/2020:14:37:02 +0800";
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
-        formatter.parse(datdString);
-        Date dateTrans = formatter.parse(datdString);
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dateTrans));
-
-//        System.out.println("date = " + DateUtils.dateToStr(new Date("27/May/2020:14:37:02 +0800")));
-
-        /*LogsParseController logsParseController = new LogsParseController();
-        String fileLineStr = "23.52.0.9 - - [24/Apr/2020:18:40:37 +0800] \"GET /services/RES_SFZGGWOH/jngl/56poInJfKmiNX2no1JRdW4w2TibZB5FrYyV5QlbShqU/getDataJson?pageNo=1&pageSize=20&search= HTTP/1.1\" 200 1391 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36\" \"-\"";
-
-        String[] subFileLineStrArr = fileLineStr.split("\\?");
-        String subFileLineStr = subFileLineStrArr[0];
-
-        String ip = subFileLineStr.substring(0, subFileLineStr.indexOf("-")).trim();
-        String time = subFileLineStr.substring(subFileLineStr.indexOf("[") + 1, subFileLineStr.indexOf("]")).trim();
-        String date = time.substring(0, time.indexOf("+")).trim();
-
-        String[] serverUrlArr = subFileLineStr.split("]");
-        String serverUrlStr = serverUrlArr[1];
-        String[] serverArrs = serverUrlStr.split("/");
-        String serviceCode=serverArrs[2];
-        String resourceCode=serverArrs[3];
-        System.out.println("ip = " + ip);
-        System.out.println("date = " + date);
-        System.out.println("serviceCode = " + serviceCode);
-        System.out.println("resourceCode = " + resourceCode);*/
-    }
 }
