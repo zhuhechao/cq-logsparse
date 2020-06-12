@@ -53,6 +53,12 @@ public class ResourceInvokeLogsEntity implements Serializable {
      * 资源名称
      */
     private String resourceName;
+    /**
+     * 路由地址
+     */
+    private String routeUrl;
+
+    private String requestMethod;
 
     /**
      * 服务编码

@@ -19,8 +19,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc: 数据共享日志分析-日志文件处理
@@ -128,13 +129,20 @@ public class LogsParseController {
             String serverUrlStr = serverUrlArr[1];
             String[] serverPathArr = serverUrlStr.split("/");
             String serviceCode = serverPathArr[2];
-            String resourceCode = serverPathArr[3];
+            String requestMethod = serverPathArr[0].replace("\"","").trim();
+            String routeUrl = "";
+            String routeStr = fileLineStr.substring(fileLineStr.lastIndexOf("\"-\"")).trim();
+            if (routeStr.length() > 10) {
+                routeUrl = routeStr.substring(routeStr.lastIndexOf("\"-\"") + 4).trim();
+            }
             log.info("ip = " + ip);
+            log.info("requestMethod = " + requestMethod);
             log.info("date = " + date);
             log.info("serviceCode = " + serviceCode);
-            log.info("resourceCode = " + resourceCode);
-            return logsParseService.queryDataByParams(ip, date, serviceCode);
+            log.info("routeStr = " + routeUrl);
+            return logsParseService.queryDataByParams(ip, date, serviceCode, routeUrl,requestMethod);
         }
         return null;
     }
+
 }

@@ -12,5 +12,5 @@ public interface LogsParseService {
 
     void insertLog(String ip, String date, String serviceCode);
 
-    ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode);
+    ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode,String routeUrl,String reqMethod);
 }
