@@ -119,7 +119,8 @@ public class LogsParseController {
      */
     private ResourceInvokeLogsEntity subFileLineStrParse(String fileLineStr) {
 //        subFileLineStr = "23.52.0.9 - - [24/Apr/2020:18:40:37 +0800] \"GET /services/RES_SFZGGWOH/jngl/56poInJfKmiNX2no1JRdW4w2TibZB5FrYyV5QlbShqU/getDataJson?pageNo=1&pageSize=20&search= HTTP/1.1\" 200 1391 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36\" \"-\"";
-        if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\" 200")) {
+//        if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\" 200")) {
+        if (fileLineStr.contains("/services/") && fileLineStr.contains("HTTP/1.1\"")) {
             String[] subFileLineStrArr = fileLineStr.split("\\?");
             String subFileLineStr = subFileLineStrArr[0];
 
@@ -129,18 +130,22 @@ public class LogsParseController {
             String serverUrlStr = serverUrlArr[1];
             String[] serverPathArr = serverUrlStr.split("/");
             String serviceCode = serverPathArr[2];
-            String requestMethod = serverPathArr[0].replace("\"","").trim();
+            String requestMethod = serverPathArr[0].replace("\"", "").trim();
             String routeUrl = "";
             String routeStr = fileLineStr.substring(fileLineStr.lastIndexOf("\"-\"")).trim();
             if (routeStr.length() > 10) {
                 routeUrl = routeStr.substring(routeStr.lastIndexOf("\"-\"") + 4).trim();
             }
+            int indexS = fileLineStr.indexOf("HTTP/1.1");
+            String tempStr = fileLineStr.substring(indexS, indexS + 13);
+            String responseStatus = tempStr.replace("HTTP/1.1\" ", "");
             log.info("ip = " + ip);
             log.info("requestMethod = " + requestMethod);
             log.info("date = " + date);
             log.info("serviceCode = " + serviceCode);
             log.info("routeStr = " + routeUrl);
-            return logsParseService.queryDataByParams(ip, date, serviceCode, routeUrl,requestMethod);
+            log.info("responseStatus = " + responseStatus);
+            return logsParseService.queryDataByParams(ip, date, serviceCode, routeUrl, requestMethod, responseStatus);
         }
         return null;
     }

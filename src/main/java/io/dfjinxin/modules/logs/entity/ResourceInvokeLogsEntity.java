@@ -61,6 +61,11 @@ public class ResourceInvokeLogsEntity implements Serializable {
     private String requestMethod;
 
     /**
+     * http status code
+     */
+    private Integer responseCode;
+
+    /**
      * 服务编码
      */
     private String serviceCode;

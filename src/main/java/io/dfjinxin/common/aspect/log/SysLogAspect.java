@@ -13,6 +13,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
 /**
  * 系统日志，切面处理类
  *
@@ -23,13 +24,13 @@ import org.springframework.stereotype.Component;
 public class SysLogAspect {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Pointcut("execution(* io.dfjinxin.modules..controller.*.*(..))")
-	public void logPointCut() {
+    @Pointcut("execution(* io.dfjinxin.modules..controller.*.*(..))")
+    public void logPointCut() {
 
-	}
+    }
 
-	@Around("logPointCut()")
-	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("logPointCut()")
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String className = joinPoint.getTarget().getClass().getName();//请求的类
         String methodName = signature.getName();//请求的方法名
@@ -41,8 +42,9 @@ public class SysLogAspect {
 
         String res = SysJsonUtils.objectToJson(result);//返回结果
         long time = System.currentTimeMillis() - beginTime;//执行时长(毫秒)
+        time = time / 1000;//(秒)
         LogManager.me().executeLog(LogTaskFactory.operatorLog(UserContenUtils.getUserId(), className, methodName, params, res, time));
-		return result;
-	}
+        return result;
+    }
 
 }

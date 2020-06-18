@@ -89,8 +89,8 @@ public class LogsParseServiceImpl implements LogsParseService {
     }
 
     @Override
-    public ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode, String routeUrl, String reqMethod) {
-        log.info("ip:{},date:{},serviceCode:{},routeUrl:{},reqMethod:{}", ip, date, serviceCode, routeUrl, reqMethod);
+    public ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode, String routeUrl, String reqMethod, String resCode) {
+        log.info("ip:{},date:{},serviceCode:{},routeUrl:{},reqMethod:{},resCode:{}", ip, date, serviceCode, routeUrl, reqMethod, resCode);
 
         if (StringUtils.isEmpty(ip) || StringUtils.isEmpty(date) || StringUtils.isEmpty(serviceCode)) {
             return null;
@@ -124,6 +124,7 @@ public class LogsParseServiceImpl implements LogsParseService {
         entity.setRouteUrl(routeUrl);
         entity.setRequestMethod(reqMethod);
         entity.setCreateTime(new Date());
+        entity.setResponseCode(Integer.valueOf(resCode));
         return entity;
     }
 }

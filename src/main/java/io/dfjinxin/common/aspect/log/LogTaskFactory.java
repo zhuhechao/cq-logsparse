@@ -16,7 +16,7 @@ public class LogTaskFactory {
 			@Override
 			public void run() {
 				try {
-					logger.info("Execution Log, userId: {}, Class：{}, Method：{}, Params：{}, Result: {}, Total Time：{}", userId, className, methodName, parms, result, time);
+					logger.info("Execution Log, userId:{}, Class:{}, Method:{}, Params:{}, Result:{}, Total Time:{}s.", userId, className, methodName, parms, result, time);
 				} catch (Exception e) {
 					logger.error("保存操作日志异常：", e);
 				}
