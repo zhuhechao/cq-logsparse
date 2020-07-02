@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Desc: 数据共享日志分析-日志文件处理
@@ -68,11 +68,15 @@ public class LogsParseController {
         log.info("数据共享日志文件分析,params- filepath:{},filename:{}", path, fileName);
         String fileLine = "";
         List<ResourceInvokeLogsEntity> list = new ArrayList<>();
-        long startT = System.currentTimeMillis();
+//        List<ResourceInvokeLogsEntity> list = new CopyOnWriteArrayList<>();
+        Date start = new Date();
+        log.info("文件解析******************start**********************");
+
         try {
-            FileInputStream inputStream = new FileInputStream(path + fileName);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            while ((fileLine = bufferedReader.readLine()) != null) {
+            int buffSize = 1024 * 1024 * 1024; //缓冲区1G
+            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(path + fileName));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"), buffSize);
+            while ((fileLine = reader.readLine()) != null) {
                 try {
                     ResourceInvokeLogsEntity logsEntity = this.subFileLineStrParse(fileLine);
                     if (logsEntity != null) list.add(logsEntity);
@@ -82,14 +86,16 @@ public class LogsParseController {
                 }
             }
             inputStream.close();
-            bufferedReader.close();
+            reader.close();
         } catch (IOException e) {
             String errMsg = path + fileName + "文件不存在!";
             log.error(errMsg);
             return R.ok(errMsg);
         }
-        long endT = System.currentTimeMillis();
-        log.info("从文件:{},共解析:{}条记录,用时:{}s!", fileName, list.size(), (endT - startT) / 1000);
+        Date end = new Date();
+        log.info("解析开始时间:{},解析结束时间{}", DateUtils.dateToStrYMDHMS(start), DateUtils.dateToStrYMDHMS(end));
+        log.info("从文件:{},共解析:{}条记录,用时:{}mins!", fileName, list.size(), TimeUnit.MILLISECONDS.toMinutes(end.getTime() - start.getTime()));
+        log.info("文件解析*****************end***********************");
         this.resourceInvokeLogsService.insertBatchByList(list);
         return R.ok();
     }
@@ -140,12 +146,12 @@ public class LogsParseController {
         String tempStr = fileLineStr.substring(indexS, indexS + 13);
         String rspCode = tempStr.replace("HTTP/1.1\" ", "");
 
-        log.info("ip = " + ip);
-        log.info("requestMethod = " + requestMethod);
-        log.info("date = " + date);
-        log.info("serviceCode = " + serviceCode);
-        log.info("routeStr = " + routeUrl);
-        log.info("responseStatus = " + rspCode);
+//        log.info("ip = " + ip);
+//        log.info("requestMethod = " + requestMethod);
+//        log.info("date = " + date);
+//        log.info("serviceCode = " + serviceCode);
+//        log.info("routeStr = " + routeUrl);
+//        log.info("responseStatus = " + rspCode);
         return logsParseService.queryDataByParams(ip, date, serviceCode, routeUrl, requestMethod, rspCode);
     }
 
@@ -164,4 +170,8 @@ public class LogsParseController {
         return null;
     }
 
+    public static void main(String[] args) {
+        long se = 3769000;
+        System.out.println(TimeUnit.MILLISECONDS.toMinutes(se));
+    }
 }

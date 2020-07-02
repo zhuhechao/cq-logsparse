@@ -6,27 +6,27 @@ mysql:
 #    url: jdbc:mysql://10.1.0.139:3306/zhjg?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
 #    username: root
 #    password: 123456
-    url: jdbc:mysql://109.244.99.167:30001/oracle_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://10.10.30.9:30001/oracle_deploy?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: P@ssw0rd
 
-hive:
-    #  公司测试环境
-    user: hdfs
-    password:
-    url: jdbc:hive2://10.1.3.238:10000/
-    driver-class-name: org.apache.hive.jdbc.HiveDriver
-    filters: stat
-    initialSize: 2
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 500
+#hive:
+#    #  公司测试环境
+#    user: hdfs
+#    password:
+#    url: jdbc:hive2://10.1.3.238:10000/
+#    driver-class-name: org.apache.hive.jdbc.HiveDriver
+#    filters: stat
+#    initialSize: 2
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: false
+#    maxPoolPreparedStatementPerConnectionSize: 500
 
 file:
-    path: /home/fhv/data/logs/api/daily-logs/
+    path: /data/logs/api/daliy_log/

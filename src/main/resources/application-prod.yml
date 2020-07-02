@@ -10,22 +10,22 @@ mysql:
     username: jinxin
     password: P@ssw0rd
 
-hive:
-    user: gx_user
-    password: 1qaz2wsx
-    url: jdbc:hive2://172.16.12.60:10000/cqlog
-    driver-class-name: org.apache.hive.jdbc.HiveDriver
-    filters: stat
-    initialSize: 5
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 500
+#hive:
+#    user: gx_user
+#    password: 1qaz2wsx
+#    url: jdbc:hive2://172.16.12.60:10000/cqlog
+#    driver-class-name: org.apache.hive.jdbc.HiveDriver
+#    filters: stat
+#    initialSize: 5
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: false
+#    maxPoolPreparedStatementPerConnectionSize: 500
 
 file:
     path: /data/logs/api/daliy_log/

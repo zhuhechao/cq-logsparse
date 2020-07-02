@@ -90,7 +90,7 @@ public class LogsParseServiceImpl implements LogsParseService {
 
     @Override
     public ResourceInvokeLogsEntity queryDataByParams(String ip, String date, String serviceCode, String routeUrl, String reqMethod, String resCode) {
-        log.info("ip:{},date:{},serviceCode:{},routeUrl:{},reqMethod:{},resCode:{}", ip, date, serviceCode, routeUrl, reqMethod, resCode);
+//        log.info("query req params******* ip:{},date:{},serviceCode:{},routeUrl:{},reqMethod:{},resCode:{}", ip, date, serviceCode, routeUrl, reqMethod, resCode);
 
         if (StringUtils.isEmpty(ip) || StringUtils.isEmpty(date) || StringUtils.isEmpty(serviceCode)) {
             return null;

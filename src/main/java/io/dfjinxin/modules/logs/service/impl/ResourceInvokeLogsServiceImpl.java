@@ -1,6 +1,7 @@
 package io.dfjinxin.modules.logs.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.dfjinxin.common.utils.DateUtils;
 import io.dfjinxin.modules.logs.dao.ResourceInvokeLogsMapper;
 import io.dfjinxin.modules.logs.entity.ResourceInvokeLogsEntity;
 import io.dfjinxin.modules.logs.service.ResourceInvokeLogsService;
@@ -8,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -18,7 +21,8 @@ public class ResourceInvokeLogsServiceImpl extends ServiceImpl<ResourceInvokeLog
     @Transactional(rollbackFor = Exception.class)
     public void insertBatchByList(List<ResourceInvokeLogsEntity> logsEntityList) {
 
-        long starT = System.currentTimeMillis();
+        log.info("数据入库################start######################");
+        Date start = new Date();
         if (null != logsEntityList && logsEntityList.size() > 0) {
             int pointsDataLimit = 1000;//限制条数
             Integer size = logsEntityList.size();
@@ -40,7 +44,9 @@ public class ResourceInvokeLogsServiceImpl extends ServiceImpl<ResourceInvokeLog
                 super.saveBatch(logsEntityList);
             }
         }
-        long endT = System.currentTimeMillis();
-        log.info("批量(insertBatchByList)入库用时:{}s", (endT - starT) / 1000);
+        Date end = new Date();
+        log.info("数据入库开始时间:{},结束时间{}", DateUtils.dateToStrYMDHMS(start), DateUtils.dateToStrYMDHMS(end));
+        log.info("批量(insertBatchByList)入库用时:{}mins", TimeUnit.MILLISECONDS.toMinutes(end.getTime() - start.getTime()));
+        log.info("数据入库################end######################");
     }
 }

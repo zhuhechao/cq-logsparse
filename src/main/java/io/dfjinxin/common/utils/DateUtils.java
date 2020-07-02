@@ -73,6 +73,14 @@ public class DateUtils {
         return null;
     }
 
+    public static String dateToStrYMDHMS(Date date) {
+        if (date != null) {
+            SimpleDateFormat df = new SimpleDateFormat(DATE_TIME_PATTERN);
+            return df.format(date);
+        }
+        return null;
+    }
+
     /**
      * 字符串转换成日期
      *

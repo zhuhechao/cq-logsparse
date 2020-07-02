@@ -56,10 +56,10 @@
     <springProfile name="dev">
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR" />
-        <logger name="io.dfjinxin" level="DEBUG" />
+        <logger name="io.dfjinxin" level="INFO" />
 
         <!-- 为某个包下的所有类的指定Appender -->
-        <logger name="io.dfjinxin" level="DEBUG" additivity="false">
+        <logger name="io.dfjinxin" level="INFO" additivity="false">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="FILE"/>
             <appender-ref ref="ERROR"/>
@@ -78,10 +78,10 @@
     <springProfile name="test">
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR" />
-        <logger name="io.dfjinxin" level="DEBUG" />
+        <logger name="io.dfjinxin" level="INFO" />
 
         <!-- 为某个包下的所有类的指定Appender -->
-        <logger name="io.dfjinxin" level="DEBUG" additivity="false">
+        <logger name="io.dfjinxin" level="INFO" additivity="false">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="FILE"/>
             <appender-ref ref="ERROR"/>
@@ -100,10 +100,10 @@
     <springProfile name="prod">
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR" />
-        <logger name="io.dfjinxin" level="DEBUG" />
+        <logger name="io.dfjinxin" level="INFO" />
 
         <!-- 为某个包下的所有类的指定Appender -->
-        <logger name="io.dfjinxin" level="DEBUG" additivity="false">
+        <logger name="io.dfjinxin" level="INFO" additivity="false">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="FILE"/>
             <appender-ref ref="ERROR"/>
